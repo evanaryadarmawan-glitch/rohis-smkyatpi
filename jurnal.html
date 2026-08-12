@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurnal Mutabaah Yaumi — ROHIS SMK YATPI Godong</title>
+    <meta name="description" content="Catat amalan harianmu: shalat berjamaah, infaq, shalat sunnah, dan tadarus Al-Qur'an bersama jurnal mutabaah yaumi ROHIS.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Amiri:ital@1&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" href="assets/img/logo.jpg">
+    <link rel="icon" href="assets/img/logo.jpg">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <div class="site-loader" id="siteLoader">
+        <div class="loader-emblem"><span class="loader-ring"></span><i class="fa-solid fa-mosque"></i></div>
+        <p class="loader-text">ROHIS SMK YATPI Godong</p>
+        <p class="loader-sub">"Fastabiqul Khairat..."</p>
+    </div>
+
+    <div class="marquee-slogan">
+        <div class="marquee-content">
+            ✦ Fastabiqul Khairat! Khoir, Khoir, Khoir! ✦ ROHIS SMK YATPI Godong Berakhlak Mulia ✦ Fastabiqul Khairat! Khoir, Khoir, Khoir! ✦ ROHIS SMK YATPI Godong Berakhlak Mulia ✦&nbsp;
+        </div>
+    </div>
+
+    <header class="site-header">
+        <div class="nav-wrapper">
+            <div class="brand">
+                <img src="assets/img/logo.jpg" alt="Logo ROHIS">
+                <div class="brand-info"><h1>ROHIS SMK YATPI</h1><p>GODONG - JAWA TENGAH</p></div>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Beranda</a>
+                <a href="tentang.html">Tentang Kami</a>
+                <a href="kegiatan.html">Kegiatan</a>
+                <a href="jurnal.html" class="active">Jurnal Yaumi</a>
+                <a href="layanan.html">Layanan</a>
+                <a href="kontak.html">Kontak</a>
+            </nav>
+            <div class="nav-right">
+                <button class="icon-btn" onclick="toggleVisionMode()"><i class="v-icon fa-solid fa-moon"></i></button>
+                <button class="icon-btn burger" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html">Beranda</a>
+            <a href="tentang.html">Tentang Kami</a>
+            <a href="kegiatan.html">Kegiatan</a>
+            <a href="jurnal.html" class="active">Jurnal Yaumi</a>
+            <a href="layanan.html">Layanan</a>
+            <a href="kontak.html">Kontak</a>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <span class="eyebrow">Mutabaah Yaumi</span>
+        <h2>Jurnal <span>Amalan Harian</span></h2>
+        <p>Isi jurnal setiap hari untuk membiasakan diri istiqamah dalam ibadah wajib dan sunnah.</p>
+    </section>
+
+    <section class="container">
+        <div class="interactive-grid core-layout">
+            <div class="panel-box">
+                <h4><i class="fa-solid fa-calendar-check"></i> Pengisian Jurnal Yaumi</h4>
+                <form id="mutabaahForm" onsubmit="saveAmalanTrack(event)">
+                    <div class="form-group">
+                        <label>Nama Lengkap Siswa</label>
+                        <input type="text" id="namaSiswa" placeholder="Ketik nama lengkap Anda..." required>
+                    </div>
+                    <div class="check-item"><input type="checkbox" id="berjamaah"> <label for="berjamaah">Shalat Berjamaah 5 Waktu</label></div>
+                    <div class="check-item"><input type="checkbox" id="infaq"> <label for="infaq">Infaq / Sedekah Sukarela</label></div>
+                    <div class="check-item"><input type="checkbox" id="sunnah"> <label for="sunnah">Shalat Sunnah Dhuha / Tahajud</label></div>
+                    <div class="check-item"><input type="checkbox" id="quran"> <label for="quran">Membaca Al-Qur'an & Tadarus</label></div>
+                    <button type="submit" class="btn-action"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Data Jurnal</button>
+                </form>
+            </div>
+
+            <div class="panel-box">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px;flex-wrap:wrap;">
+                    <h4 style="margin:0;"><i class="fa-solid fa-server"></i> Log Jurnal Terbaru</h4>
+                    <button class="btn-secondary" onclick="printLatestLog()"><i class="fa-solid fa-print"></i> Cetak Terakhir</button>
+                </div>
+                <p style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">Menampilkan 10 entri terbaru. Pengelolaan penuh data jurnal dilakukan pengurus melalui admin panel.</p>
+                <div class="table-container">
+                    <table class="log-table">
+                        <thead>
+                            <tr>
+                                <th>Waktu</th><th>Nama Siswa</th><th>Berjamaah</th><th>Infaq</th><th>Dhuha/Tahajud</th><th>Al-Qur'an</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h5>ROHIS SMK YATPI Godong</h5>
+                <p>Wadah pembinaan akhlak dan syiar Islam bagi siswa-siswi SMK YATPI Godong, Grobogan, Jawa Tengah.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Navigasi</h5>
+                <a href="tentang.html">Tentang Kami</a>
+                <a href="kegiatan.html">Kegiatan</a>
+                <a href="layanan.html">Layanan</a>
+            </div>
+            <div class="footer-col">
+                <h5>Kontak</h5>
+                <a href="kontak.html">Struktur & Kontak Pengurus</a>
+                <a href="admin/login.html">Admin Panel</a>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2026 ROHIS SMK YATPI Godong. Fastabiqul Khairat - Khoir, Khoir, Khoir!</div>
+    </footer>
+
+    <div id="print-only-area">
+        <div class="p-header">
+            <h2>ROHIS SMK YATPI GODONG</h2>
+            <p style="margin:5px 0 0 0;font-size:12px;">Data Log Jurnal Yaumi Siswa</p>
+        </div>
+        <table class="p-table">
+            <thead><tr><th>Waktu</th><th>Nama Siswa</th><th>Berjamaah</th><th>Infaq</th><th>Dhuha/Tahajud</th><th>Al-Qur'an</th></tr></thead>
+            <tbody id="printTableBody"></tbody>
+        </table>
+        <div class="p-footer"><p>&copy; 2026 ROHIS SMK YATPI Godong. Dicetak secara digital.</p></div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="assets/js/firebase-config.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        function loadAmalanLogs() {
+            const dataStorage = ROHIS.getJurnal();
+            const containerBody = document.getElementById('logTableBody');
+            if (dataStorage.length === 0) {
+                containerBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:15px;">Belum ada data jurnal yang dimasukkan siswa.</td></tr>`;
+                return;
+            }
+            containerBody.innerHTML = dataStorage.slice().reverse().slice(0, 10).map(item => `
+                <tr>
+                    <td style="color:var(--primary);font-weight:700;">${item.timestamp}</td>
+                    <td><b>${item.nama}</b></td>
+                    <td>${item.berjamaah ? '<span class="badge-yes">✔ Ya</span>' : '<span class="badge-no">❌ Tidak</span>'}</td>
+                    <td>${item.infaq ? '<span class="badge-yes">✔ Ya</span>' : '<span class="badge-no">❌ Tidak</span>'}</td>
+                    <td>${item.sunnah ? '<span class="badge-yes">✔ Ya</span>' : '<span class="badge-no">❌ Tidak</span>'}</td>
+                    <td>${item.quran ? '<span class="badge-yes">✔ Ya</span>' : '<span class="badge-no">❌ Tidak</span>'}</td>
+                </tr>
+            `).join('');
+        }
+
+        function saveAmalanTrack(e) {
+            e.preventDefault();
+            const nama = document.getElementById('namaSiswa').value;
+            const b = document.getElementById('berjamaah').checked;
+            const i = document.getElementById('infaq').checked;
+            const s = document.getElementById('sunnah').checked;
+            const q = document.getElementById('quran').checked;
+            const opsiFormat = { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' };
+            const stampWaktuFormatted = new Date().toLocaleDateString('id-ID', opsiFormat);
+
+            ROHIS.addJurnal({ timestamp: stampWaktuFormatted, nama, berjamaah: b, infaq: i, sunnah: s, quran: q });
+            alert("Alhamdulillah, data jurnal milik " + nama + " berhasil di-upload.");
+            document.getElementById('mutabaahForm').reset();
+            loadAmalanLogs();
+        }
+
+        function printLatestLog() {
+            const dataStorage = ROHIS.getJurnal();
+            if (dataStorage.length === 0) { alert("Belum ada data jurnal yang dimasukkan siswa!"); return; }
+            const latestItem = dataStorage[dataStorage.length - 1];
+            document.getElementById('printTableBody').innerHTML = `
+                <tr>
+                    <td><b>${latestItem.timestamp}</b></td>
+                    <td><b>${latestItem.nama}</b></td>
+                    <td><span class="${latestItem.berjamaah ? 'p-yes' : 'p-no'}">${latestItem.berjamaah ? '✔ Ya' : '❌ Tidak'}</span></td>
+                    <td><span class="${latestItem.infaq ? 'p-yes' : 'p-no'}">${latestItem.infaq ? '✔ Ya' : '❌ Tidak'}</span></td>
+                    <td><span class="${latestItem.sunnah ? 'p-yes' : 'p-no'}">${latestItem.sunnah ? '✔ Ya' : '❌ Tidak'}</span></td>
+                    <td><span class="${latestItem.quran ? 'p-yes' : 'p-no'}">${latestItem.quran ? '✔ Ya' : '❌ Tidak'}</span></td>
+                </tr>`;
+            window.print();
+        }
+
+        loadAmalanLogs();
+        window.addEventListener('rohis:sync', function (e) { if (!e.detail || e.detail.key === 'jurnal') loadAmalanLogs(); });
+    </script>
+</body>
+</html>

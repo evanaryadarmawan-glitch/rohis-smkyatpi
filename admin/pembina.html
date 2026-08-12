@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Pembina — Admin ROHIS</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="../assets/img/logo.jpg">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="admin-body">
+    <div class="admin-sidebar-overlay" id="adminOverlay" onclick="closeAdminSidebar()"></div>
+    <div class="admin-shell">
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="brand"><img src="../assets/img/logo.jpg" alt="Logo"><div class="brand-info"><h1>Admin ROHIS</h1><p style="color:#8fae9c;">YATPI GODONG</p></div></div>
+            <nav class="admin-nav">
+                <a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <a href="kegiatan.html"><i class="fa-solid fa-images"></i> Kegiatan</a>
+                <a href="pengurus.html"><i class="fa-solid fa-users"></i> Pengurus</a>
+                <a href="pembina.html" class="active"><i class="fa-solid fa-chalkboard-user"></i> Pembina</a>
+                <a href="jurnal.html"><i class="fa-solid fa-calendar-check"></i> Jurnal Yaumi</a>
+                <a href="aspirasi.html"><i class="fa-solid fa-box-archive"></i> Kotak Aspirasi</a>
+                <div class="divider"></div>
+                <a href="pengaturan.html"><i class="fa-solid fa-gear"></i> Pengaturan</a>
+                <a href="../index.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> Lihat Situs</a>
+                <a href="#" onclick="adminLogout()"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-topbar">
+                <button class="admin-menu-btn" onclick="toggleAdminSidebar()"><i class="fa-solid fa-bars"></i></button>
+                <h2>Kelola Pembina Rohis</h2>
+                <button class="icon-btn" style="background:var(--primary);" onclick="toggleVisionMode()"><i class="v-icon fa-solid fa-moon"></i></button>
+            </div>
+
+            <div class="interactive-grid core-layout">
+                <div class="panel-box">
+                    <h4><i class="fa-solid fa-user-plus"></i> Tambah Pembina</h4>
+                    <form id="pembinaForm">
+                        <div class="form-group"><label>Nama Lengkap</label><input type="text" id="fNama" placeholder="Contoh: Ahmad Fauzi, S.Pd.I" required></div>
+                        <div class="form-group"><label>Jabatan Pembina</label><input type="text" id="fJabatan" placeholder="Contoh: Pembina Utama ROHIS" required></div>
+                        <div class="form-group"><label>Keterangan (opsional)</label><input type="text" id="fKeterangan" placeholder="Contoh: Guru Pendidikan Agama Islam"></div>
+                        <div class="form-group"><label>Nomor WhatsApp (opsional)</label><input type="text" id="fWa" placeholder="Contoh: 6289621412600 (kode negara, tanpa +)"></div>
+                        <div class="form-group"><label>Foto (opsional, boleh foto bersama)</label><input type="file" id="fFoto" accept="image/*"></div>
+                        <button type="submit" class="btn-action"><i class="fa-solid fa-floppy-disk"></i> Simpan Pembina</button>
+                    </form>
+                </div>
+
+                <div class="panel-box">
+                    <h4><i class="fa-solid fa-list"></i> Daftar Pembina</h4>
+                    <div id="pembinaList"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="../assets/js/firebase-config.js"></script>
+    <script src="../assets/js/data.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/admin.js"></script>
+    <script>
+        function renderList() {
+            const data = ROHIS.getPembina();
+            const el = document.getElementById('pembinaList');
+            if (data.length === 0) { el.innerHTML = '<div class="empty-state">Belum ada data pembina.</div>'; return; }
+            el.innerHTML = data.map(p => `
+                <div class="card" style="display:flex;gap:12px;padding:12px;margin-bottom:10px;align-items:center;">
+                    <label class="admin-photo-slot" title="Klik untuk ganti foto">
+                        ${p.foto ? `<img src="${p.foto}" alt="${p.nama}">` : `<div class="struktur-avatar" style="width:44px;height:44px;font-size:16px;margin:0;"><i class="fa-solid fa-chalkboard-user"></i></div>`}
+                        <input type="file" accept="image/*" style="display:none;" onchange="gantiFotoPembina('${p.id}', this.files[0])">
+                    </label>
+                    <div style="flex:1;min-width:0;">
+                        <h5 style="font-size:13px;margin-bottom:2px;">${p.nama}</h5>
+                        <span style="font-size:11px;color:var(--accent);font-weight:700;">${p.jabatan}</span>
+                        ${p.keterangan ? `<p style="font-size:11px;color:var(--text-muted);">${p.keterangan}</p>` : ''}
+                        ${p.wa ? `<p style="font-size:11px;color:var(--text-muted);">wa.me/${p.wa}</p>` : ''}
+                    </div>
+                    <button class="btn-secondary btn-danger" onclick="deleteItem('${p.id}')"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        document.getElementById('pembinaForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const nama = document.getElementById('fNama').value;
+            const jabatan = document.getElementById('fJabatan').value;
+            const keterangan = document.getElementById('fKeterangan').value;
+            const wa = document.getElementById('fWa').value.replace(/[^0-9]/g, '');
+            const fotoFile = document.getElementById('fFoto').files[0];
+            const formEl = this;
+            rohisReadImageCompressed(fotoFile, 480, 0.72, function (fotoData) {
+                const payload = { nama, jabatan, keterangan, wa };
+                if (fotoData) payload.foto = fotoData;
+                ROHIS.addPembina(payload);
+                formEl.reset();
+                renderList();
+            });
+        });
+
+        function gantiFotoPembina(id, file) {
+            if (!file) return;
+            rohisReadImageCompressed(file, 480, 0.72, function (fotoData) {
+                if (fotoData) { ROHIS.updatePembina(id, { foto: fotoData }); renderList(); }
+            });
+        }
+
+        function deleteItem(id) {
+            if (confirm('Hapus data pembina ini?')) { ROHIS.deletePembina(id); renderList(); }
+        }
+
+        renderList();
+        window.addEventListener('rohis:sync', function (e) { if (!e.detail || e.detail.key === 'pembina') renderList(); });
+    </script>
+</body>
+</html>

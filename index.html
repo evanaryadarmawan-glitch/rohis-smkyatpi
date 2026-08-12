@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROHIS SMK YATPI Godong — Beranda</title>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "ROHIS SMK YATPI Godong",
+  "alternateName": ["ROHIS SMK YATPI", "ROHIS Yatpi Godong"],
+  "url": "https://rohis-smk-yatpi-godong.vercel.app/"
+}
+</script>
+    <meta name="description" content="Situs resmi Rohani Islam (ROHIS) SMK YATPI Godong: dokumentasi kegiatan, jurnal mutabaah yaumi, layanan digital keislaman, dan kontak pengurus.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Amiri:ital@1&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" href="assets/img/logo.jpg">
+    <link rel="icon" href="assets/img/logo.jpg">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+
+    <div class="site-loader" id="siteLoader">
+        <div class="loader-emblem"><span class="loader-ring"></span><i class="fa-solid fa-mosque"></i></div>
+        <p class="loader-text">ROHIS SMK YATPI Godong</p>
+        <p class="loader-sub">"Fastabiqul Khairat..."</p>
+    </div>
+
+    <div class="marquee-slogan">
+        <div class="marquee-content">
+            ✦ Fastabiqul Khairat! Khoir, Khoir, Khoir! ✦ ROHIS SMK YATPI Godong Berakhlak Mulia ✦ Fastabiqul Khairat! Khoir, Khoir, Khoir! ✦ ROHIS SMK YATPI Godong Berakhlak Mulia ✦&nbsp;
+        </div>
+    </div>
+
+    <header class="site-header">
+        <div class="nav-wrapper">
+            <div class="brand">
+                <img src="assets/img/logo.jpg" alt="Logo ROHIS">
+                <div class="brand-info"><h1>ROHIS SMK YATPI</h1><p>GODONG - JAWA TENGAH</p></div>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html" class="active">Beranda</a>
+                <a href="tentang.html">Tentang Kami</a>
+                <a href="kegiatan.html">Kegiatan</a>
+                <a href="jurnal.html">Jurnal Yaumi</a>
+                <a href="layanan.html">Layanan</a>
+                <a href="kontak.html">Kontak</a>
+            </nav>
+            <div class="nav-right">
+                <button class="icon-btn" onclick="toggleVisionMode()"><i class="v-icon fa-solid fa-moon"></i></button>
+                <button class="icon-btn burger" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html" class="active">Beranda</a>
+            <a href="tentang.html">Tentang Kami</a>
+            <a href="kegiatan.html">Kegiatan</a>
+            <a href="jurnal.html">Jurnal Yaumi</a>
+            <a href="layanan.html">Layanan</a>
+            <a href="kontak.html">Kontak</a>
+        </div>
+    </header>
+
+    <section class="page-hero hero-home">
+        <span class="eyebrow">Rohani Islam SMK YATPI Godong</span>
+        <h2>Membangun Generasi Madani Menuju <span>Fastabiqul Khairat</span></h2>
+        <p>Ekosistem digital kerohanian Islam terpadu: mutabaah harian, edukasi, syiar, dan pelayanan umat berbasis teknologi.</p>
+    </section>
+
+    <div class="prayer-section">
+        <div class="prayer-container">
+            <div class="prayer-header">
+                <h4><i class="fa-solid fa-clock"></i> Waktu Shalat Real-Time (Jawa Tengah)</h4>
+                <span style="font-size:11px;color:var(--text-muted);font-weight:700;" id="live-date">Sinkronisasi...</span>
+            </div>
+            <div class="prayer-grid">
+                <div class="prayer-card"><h5>Subuh</h5><p id="shubuh">--:--</p></div>
+                <div class="prayer-card"><h5>Dzuhur</h5><p id="dzuhur">--:--</p></div>
+                <div class="prayer-card"><h5>Ashar</h5><p id="ashar">--:--</p></div>
+                <div class="prayer-card"><h5>Maghrib</h5><p id="maghrib">--:--</p></div>
+                <div class="prayer-card"><h5>Isya</h5><p id="isya">--:--</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="widget-row">
+        <div class="widget-card">
+            <div class="widget-display-area" id="box-quote">
+                <div class="arabic">إِنَّ مَعَ الْعُسْرِ يُسْرًا</div>
+                <p style="font-size:13px;font-weight:600;">"Sesungguhnya sesudah kesulitan itu ada kemudahan."</p>
+                <span style="font-size:11px;color:var(--text-muted);margin-top:4px;">(QS. Al-Insyirah: 6)</span>
+            </div>
+            <button class="widget-btn" onclick="nextQuote()"><i class="fa-solid fa-rotate"></i> Acak Ayat</button>
+        </div>
+        <div class="widget-card">
+            <div class="widget-display-area">
+                <span style="font-size:11px;font-weight:700;color:var(--primary);text-transform:uppercase;margin-bottom:8px;display:block;">Asmaul Husna Hari Ini</span>
+                <div id="box-asmaul">
+                    <div class="arabic">الرَّحْمَنُ</div>
+                    <p style="font-size:15px;font-weight:700;color:var(--accent);">Ar-Rahman</p>
+                    <p style="font-size:12px;color:var(--text-muted);">Yang Maha Pengasih</p>
+                </div>
+            </div>
+            <button class="widget-btn" onclick="nextAsmaul()"><i class="fa-solid fa-heart"></i> Zikir Berikutnya</button>
+        </div>
+        <div class="widget-card">
+            <div class="widget-display-area">
+                <span style="font-size:11px;font-weight:700;color:var(--primary);text-transform:uppercase;display:block;margin-bottom:5px;">Digital Tasbih Counter</span>
+                <h3 style="font-size:32px;font-weight:800;color:var(--accent);margin:2px 0;" id="tasbih-num">0</h3>
+                <p style="font-size:12px;color:var(--text-muted);">Mari basahi lidah dengan berzikir hari ini.</p>
+            </div>
+            <div style="display:flex;justify-content:center;gap:8px;margin-top:auto;">
+                <button class="btn-secondary" style="background:var(--primary);" onclick="countTasbih()">Hitung Zikir</button>
+                <button class="btn-secondary btn-danger" onclick="resetTasbih()">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="container">
+        <div class="section-heading">
+            <span class="eyebrow">Syiar & Dokumentasi</span>
+            <h3>Kegiatan Terbaru ROHIS</h3>
+            <p>Sebagian agenda dan dokumentasi terkini dari kegiatan kerohanian Islam di SMK YATPI Godong.</p>
+        </div>
+        <div class="activity-grid" id="activityCards"></div>
+        <div style="text-align:center;">
+            <a href="kegiatan.html" class="widget-btn" style="display:inline-block;"><i class="fa-solid fa-arrow-right"></i> Lihat Semua Kegiatan</a>
+        </div>
+    </section>
+
+    <section class="container" style="margin-top:0;">
+        <div class="interactive-grid utility-layout">
+            <a href="jurnal.html" class="panel-box" style="text-decoration:none;">
+                <h4><i class="fa-solid fa-calendar-check"></i> Jurnal Mutabaah Yaumi</h4>
+                <p style="font-size:13px;color:var(--text-muted);">Catat amalan harianmu: shalat berjamaah, infaq, sunnah, dan tadarus Al-Qur'an.</p>
+            </a>
+            <a href="layanan.html" class="panel-box" style="text-decoration:none;">
+                <h4><i class="fa-solid fa-wallet"></i> Layanan Digital</h4>
+                <p style="font-size:13px;color:var(--text-muted);">Kalkulator infaq & zakat maal, serta kotak aspirasi anonim untuk pengurus.</p>
+            </a>
+            <a href="kontak.html" class="panel-box" style="text-decoration:none;">
+                <h4><i class="fa-solid fa-id-card"></i> Kontak Pengurus</h4>
+                <p style="font-size:13px;color:var(--text-muted);">Hubungi pengurus aktif ROHIS langsung melalui WhatsApp.</p>
+            </a>
+        </div>
+
+        <div class="slogan-banner">
+            <h3>YEL-YEL SEMANGAT PERJUANGAN</h3>
+            <h2>"Fastabiqul Khairat! <br>Khoir, Khoir, Khoir!"</h2>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h5>ROHIS SMK YATPI Godong</h5>
+                <p>Wadah pembinaan akhlak dan syiar Islam bagi siswa-siswi SMK YATPI Godong, Grobogan, Jawa Tengah.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Navigasi</h5>
+                <a href="tentang.html">Tentang Kami</a>
+                <a href="kegiatan.html">Kegiatan</a>
+                <a href="jurnal.html">Jurnal Yaumi</a>
+                <a href="layanan.html">Layanan</a>
+            </div>
+            <div class="footer-col">
+                <h5>Kontak</h5>
+                <a href="kontak.html">Struktur & Kontak Pengurus</a>
+                <a href="admin/login.html">Admin Panel</a>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2026 ROHIS SMK YATPI Godong. Fastabiqul Khairat - Khoir, Khoir, Khoir!</div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="assets/js/firebase-config.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        const listAyat = [
+            { ar: "إِنَّ مَعَ الْعُسْرِ يُسْرًا", id: '"Sesungguhnya sesudah kesulitan itu ada kemudahan."', ref: "(QS. Al-Insyirah: 6)" },
+            { ar: "وَتَوَكَّلْ عَلَى اللَّهِ", id: '"Dan bertawakallah kepada Allah (karena Dia sebaik-baik pelindung)."', ref: "(QS. Al-Ahzab: 3)" },
+            { ar: "فَاسْتَبِقُوا الْخَيْرَاتِ", id: '"Maka berlomba-lombalah kamu dalam kebaikan."', ref: "(QS. Al-Baqarah: 148)" },
+            { ar: "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ", id: '"Sesungguhnya Allah bersama orang-orang yang sabar."', ref: "(QS. Al-Baqarah: 153)" },
+            { ar: "وَقُلْ رَبِّ زِدْنِي عِلْمًا", id: '"Dan katakanlah, Ya Tuhanku, tambahkanlah ilmu kepadaku."', ref: "(QS. Thaha: 114)" },
+            { ar: "ادْعُونِي أَسْتَجِبْ لَكُمْ", id: '"Berdoalah kepada-Ku, niscaya akan Aku perkenankan bagimu."', ref: "(QS. Ghafir: 60)" },
+            { ar: "إِنَّ اللَّهَ لَا يُخْلِفُ الْمِيعَادَ", id: '"Sesungguhnya Allah tidak menyalahi janji."', ref: "(QS. Ali 'Imran: 9)" }
+        ];
+        const listAsmaul = [
+            { ar: "الرَّحْمَنُ", id: "Ar-Rahman", arti: "Yang Maha Pengasih" },
+            { ar: "الرَّحِيمُ", id: "Ar-Rahim", arti: "Yang Maha Penyayang" },
+            { ar: "الْمَلِكُ", id: "Al-Malik", arti: "Yang Maha Merajai" },
+            { ar: "الْقُدُّوسُ", id: "Al-Quddus", arti: "Yang Maha Suci" },
+            { ar: "السَّلَامُ", id: "As-Salam", arti: "Yang Maha Memberi Kesejahteraan" },
+            { ar: "الْمُؤْمِنُ", id: "Al-Mu'min", arti: "Yang Maha Memberi Keamanan" },
+            { ar: "الْمُهَيْمِنُ", id: "Al-Muhaimin", arti: "Yang Maha Mengendali / Memelihara" },
+            { ar: "الْعَزِيزُ", id: "Al-Aziz", arti: "Yang Maha Perkasa" },
+            { ar: "الْجَبَّارُ", id: "Al-Jabbar", arti: "Yang Memiliki Mutlak Kegagahan" },
+            { ar: "الْمُتَكَبِّرُ", id: "Al-Mutakabbir", arti: "Yang Memiliki Kebesaran" }
+        ];
+        let lastAyatIdx = 0;
+        function nextQuote() {
+            let rng = Math.floor(Math.random() * listAyat.length);
+            while (rng === lastAyatIdx && listAyat.length > 1) rng = Math.floor(Math.random() * listAyat.length);
+            lastAyatIdx = rng;
+            const data = listAyat[rng];
+            document.getElementById('box-quote').innerHTML = `<div class="arabic">${data.ar}</div><p style="font-size:13px;font-weight:600;">${data.id}</p><span style="font-size:11px;color:var(--text-muted);margin-top:4px;">${data.ref}</span>`;
+        }
+        let lastAsmaulIdx = 0;
+        function nextAsmaul() {
+            let rng = Math.floor(Math.random() * listAsmaul.length);
+            while (rng === lastAsmaulIdx && listAsmaul.length > 1) rng = Math.floor(Math.random() * listAsmaul.length);
+            lastAsmaulIdx = rng;
+            const data = listAsmaul[rng];
+            document.getElementById('box-asmaul').innerHTML = `<div class="arabic">${data.ar}</div><p style="font-size:15px;font-weight:700;color:var(--accent);">${data.id}</p><p style="font-size:12px;color:var(--text-muted);">${data.arti}</p>`;
+        }
+        let count = 0;
+        function countTasbih() { count++; document.getElementById('tasbih-num').innerText = count; }
+        function resetTasbih() { count = 0; document.getElementById('tasbih-num').innerText = count; }
+
+        renderActivityCards('activityCards', 3);
+    </script>
+</body>
+</html>

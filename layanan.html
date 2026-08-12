@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layanan Digital — ROHIS SMK YATPI Godong</title>
+    <meta name="description" content="Kalkulator infaq harian, kalkulator zakat maal, dan kotak aspirasi anonim untuk pengurus ROHIS SMK YATPI Godong.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Amiri:ital@1&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" href="assets/img/logo.jpg">
+    <link rel="icon" href="assets/img/logo.jpg">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <div class="site-loader" id="siteLoader">
+        <div class="loader-emblem"><span class="loader-ring"></span><i class="fa-solid fa-mosque"></i></div>
+        <p class="loader-text">ROHIS SMK YATPI Godong</p>
+        <p class="loader-sub">"Fastabiqul Khairat..."</p>
+    </div>
+
+    <div class="marquee-slogan">
+        <div class="marquee-content">
+            ✦ Fastabiqul Khairat! Khoir, Khoir, Khoir! ✦ ROHIS SMK YATPI Godong Berakhlak Mulia ✦ Fastabiqul Khairat! Khoir, Khoir, Khoir! ✦ ROHIS SMK YATPI Godong Berakhlak Mulia ✦&nbsp;
+        </div>
+    </div>
+
+    <header class="site-header">
+        <div class="nav-wrapper">
+            <div class="brand">
+                <img src="assets/img/logo.jpg" alt="Logo ROHIS">
+                <div class="brand-info"><h1>ROHIS SMK YATPI</h1><p>GODONG - JAWA TENGAH</p></div>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Beranda</a>
+                <a href="tentang.html">Tentang Kami</a>
+                <a href="kegiatan.html">Kegiatan</a>
+                <a href="jurnal.html">Jurnal Yaumi</a>
+                <a href="layanan.html" class="active">Layanan</a>
+                <a href="kontak.html">Kontak</a>
+            </nav>
+            <div class="nav-right">
+                <button class="icon-btn" onclick="toggleVisionMode()"><i class="v-icon fa-solid fa-moon"></i></button>
+                <button class="icon-btn burger" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html">Beranda</a>
+            <a href="tentang.html">Tentang Kami</a>
+            <a href="kegiatan.html">Kegiatan</a>
+            <a href="jurnal.html">Jurnal Yaumi</a>
+            <a href="layanan.html" class="active">Layanan</a>
+            <a href="kontak.html">Kontak</a>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <span class="eyebrow">Layanan Digital</span>
+        <h2>Kalkulator & <span>Kotak Aspirasi</span></h2>
+        <p>Bantu rencanakan infaq dan zakatmu, atau sampaikan masukan membangun untuk pengurus ROHIS secara anonim.</p>
+    </section>
+
+    <section class="container">
+        <div class="interactive-grid utility-layout">
+            <div class="panel-box">
+                <h4><i class="fa-solid fa-wallet"></i> Celengan Infaq Digital</h4>
+                <div class="form-group">
+                    <label>Uang Saku Anda (Rp)</label>
+                    <input type="number" id="sakuVal" value="15000" oninput="runCalcInfaq()">
+                </div>
+                <div style="background:var(--bg-site);padding:12px;border-radius:8px;text-align:center;margin-top:10px;">
+                    <span style="font-size:11px;font-weight:700;color:var(--text-muted);">ANJURAN PORSI INFAQ (2.5%)</span>
+                    <h5 style="font-size:20px;color:var(--accent);font-weight:800;" id="sakuResult">Rp 375</h5>
+                </div>
+            </div>
+
+            <div class="panel-box">
+                <h4><i class="fa-solid fa-calculator"></i> Kalkulator Zakat Maal</h4>
+                <div class="form-group">
+                    <label>Total Harta Simpanan (1 Tahun)</label>
+                    <input type="number" id="zakatVal" value="1000000" oninput="runCalcZakat()">
+                </div>
+                <div style="background:var(--bg-site);padding:12px;border-radius:8px;text-align:center;margin-top:10px;">
+                    <span style="font-size:11px;font-weight:700;color:var(--text-muted);">WAJIB ZAKAT MAL (2.5%)</span>
+                    <h5 style="font-size:20px;color:#065f46;font-weight:800;" id="zakatResult">Rp 25.000</h5>
+                </div>
+                <p style="font-size:11px;color:var(--text-muted);margin-top:10px;">*Berlaku bila harta telah mencapai nisab & haul 1 tahun, sesuai ketentuan syariat.</p>
+            </div>
+
+            <div class="panel-box">
+                <h4><i class="fa-solid fa-box-archive"></i> Kotak Aspirasi (Anonim)</h4>
+                <form id="aspirasiForm" onsubmit="handleSuggestion(event)">
+                    <div class="form-group">
+                        <input type="text" id="kategoriIdea" placeholder="Kategori Masukan..." required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="textIdea" rows="2" placeholder="Tuliskan saran konstruktif Anda..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-action" style="margin-top:0;"><i class="fa-solid fa-paper-plane"></i> Kirim</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h5>ROHIS SMK YATPI Godong</h5>
+                <p>Wadah pembinaan akhlak dan syiar Islam bagi siswa-siswi SMK YATPI Godong, Grobogan, Jawa Tengah.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Navigasi</h5>
+                <a href="tentang.html">Tentang Kami</a>
+                <a href="kegiatan.html">Kegiatan</a>
+                <a href="jurnal.html">Jurnal Yaumi</a>
+            </div>
+            <div class="footer-col">
+                <h5>Kontak</h5>
+                <a href="kontak.html">Struktur & Kontak Pengurus</a>
+                <a href="admin/login.html">Admin Panel</a>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2026 ROHIS SMK YATPI Godong. Fastabiqul Khairat - Khoir, Khoir, Khoir!</div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="assets/js/firebase-config.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        function runCalcInfaq() {
+            const uang = document.getElementById('sakuVal').value;
+            document.getElementById('sakuResult').innerText = "Rp " + Math.round(uang * 0.025).toLocaleString('id-ID');
+        }
+        function runCalcZakat() {
+            const harta = document.getElementById('zakatVal').value;
+            document.getElementById('zakatResult').innerText = "Rp " + Math.round(harta * 0.025).toLocaleString('id-ID');
+        }
+        function handleSuggestion(e) {
+            e.preventDefault();
+            const kategori = document.getElementById('kategoriIdea').value;
+            const isi = document.getElementById('textIdea').value;
+            ROHIS.addAspirasi({ kategori, isi });
+            alert("Aspirasi berhasil dikirim secara anonim demi kebaikan pengurus ROHIS!");
+            document.getElementById('aspirasiForm').reset();
+        }
+    </script>
+</body>
+</html>
