@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Jurnal Yaumi — Admin ROHIS</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="../assets/img/logo.jpg">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="admin-body">
+    <div class="admin-sidebar-overlay" id="adminOverlay" onclick="closeAdminSidebar()"></div>
+    <div class="admin-shell">
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="brand"><img src="../assets/img/logo.jpg" alt="Logo"><div class="brand-info"><h1>Admin ROHIS</h1><p style="color:#8fae9c;">YATPI GODONG</p></div></div>
+            <nav class="admin-nav">
+                <a href="dashboard.html"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <a href="kegiatan.html"><i class="fa-solid fa-images"></i> Kegiatan</a>
+                <a href="pengurus.html"><i class="fa-solid fa-users"></i> Pengurus</a>
+                <a href="pembina.html"><i class="fa-solid fa-chalkboard-user"></i> Pembina</a>
+                <a href="jurnal.html" class="active"><i class="fa-solid fa-calendar-check"></i> Jurnal Yaumi</a>
+                <a href="aspirasi.html"><i class="fa-solid fa-box-archive"></i> Kotak Aspirasi</a>
+                <div class="divider"></div>
+                <a href="pengaturan.html"><i class="fa-solid fa-gear"></i> Pengaturan</a>
+                <a href="../index.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> Lihat Situs</a>
+                <a href="#" onclick="adminLogout()"><i class="fa-solid fa-right-from-bracket"></i> Keluar</a>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-topbar">
+                <button class="admin-menu-btn" onclick="toggleAdminSidebar()"><i class="fa-solid fa-bars"></i></button>
+                <h2>Kelola Jurnal Yaumi</h2>
+                <button class="icon-btn" style="background:var(--primary);" onclick="toggleVisionMode()"><i class="v-icon fa-solid fa-moon"></i></button>
+            </div>
+
+            <div class="panel-box">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px;flex-wrap:wrap;">
+                    <h4 style="margin:0;"><i class="fa-solid fa-server"></i> Seluruh Data Jurnal Siswa</h4>
+                    <div style="display:flex;gap:6px;">
+                        <button class="btn-secondary" onclick="printLatestLog()"><i class="fa-solid fa-print"></i> Cetak Terakhir</button>
+                        <button class="btn-secondary btn-danger" onclick="clearAllLogs()"><i class="fa-solid fa-trash-can"></i> Hapus Semua</button>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="log-table">
+                        <thead><tr><th>Waktu</th><th>Nama Siswa</th><th>Berjamaah</th><th>Infaq</th><th>Dhuha/Tahajud</th><th>Al-Qur'an</th><th>Aksi</th></tr></thead>
+                        <tbody id="logTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="print-only-area">
+        <div class="p-header"><h2>ROHIS SMK YATPI GODONG</h2><p style="margin:5px 0 0 0;font-size:12px;">Data Log Jurnal Yaumi Siswa</p></div>
+        <table class="p-table">
+            <thead><tr><th>Waktu</th><th>Nama Siswa</th><th>Berjamaah</th><th>Infaq</th><th>Dhuha/Tahajud</th><th>Al-Qur'an</th></tr></thead>
+            <tbody id="printTableBody"></tbody>
+        </table>
+        <div class="p-footer"><p>&copy; 2026 ROHIS SMK YATPI Godong. Dicetak secara digital.</p></div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="../assets/js/firebase-config.js"></script>
+    <script src="../assets/js/data.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/admin.js"></script>
+    <script>
+        function loadAmalanLogs() {
+            const dataStorage = ROHIS.getJurnal();
+            const containerBody = document.getElementById('logTableBody');
+            if (dataStorage.length === 0) {
+                containerBody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:15px;">Belum ada data jurnal yang dimasukkan siswa.</td></tr>`;
+                return;
+            }
+            containerBody.innerHTML = dataStorage.slice().reverse().map(item => `
+                <tr>
+                    <td style="color:var(--primary);font-weight:700;">${item.timestamp}</td>
+                    <td><b>${item.nama}</b></td>
+                    <td>${item.berjamaah ? '<span class="badge-yes">✔ Ya</span>' : '<span class="badge-no">❌ Tidak</span>'}</td>
+                    <td>${item.infaq ? '<span class="badge-yes">✔ Ya</span>' : '<span class="badge-no">❌ Tidak</span>'}</td>
+                    <td>${item.sunnah ? '<span class="badge-yes">✔ Ya</span>' : '<span class="badge-no">❌ Tidak</span>'}</td>
+                    <td>${item.quran ? '<span class="badge-yes">✔ Ya</span>' : '<span class="badge-no">❌ Tidak</span>'}</td>
+                    <td><button class="btn-secondary btn-danger" onclick="deleteSingleLog('${item.id}')"><i class="fa-solid fa-trash"></i></button></td>
+                </tr>
+            `).join('');
+        }
+
+        function deleteSingleLog(id) {
+            if (confirm('Hapus entri jurnal ini?')) { ROHIS.deleteJurnal(id); loadAmalanLogs(); }
+        }
+        function clearAllLogs() {
+            if (confirm('Hapus SELURUH data jurnal? Tindakan ini tidak dapat dibatalkan.')) { ROHIS.clearJurnal(); loadAmalanLogs(); }
+        }
+        function printLatestLog() {
+            const dataStorage = ROHIS.getJurnal();
+            if (dataStorage.length === 0) { alert('Belum ada data jurnal!'); return; }
+            const latestItem = dataStorage[dataStorage.length - 1];
+            document.getElementById('printTableBody').innerHTML = `
+                <tr>
+                    <td><b>${latestItem.timestamp}</b></td><td><b>${latestItem.nama}</b></td>
+                    <td><span class="${latestItem.berjamaah ? 'p-yes' : 'p-no'}">${latestItem.berjamaah ? '✔ Ya' : '❌ Tidak'}</span></td>
+                    <td><span class="${latestItem.infaq ? 'p-yes' : 'p-no'}">${latestItem.infaq ? '✔ Ya' : '❌ Tidak'}</span></td>
+                    <td><span class="${latestItem.sunnah ? 'p-yes' : 'p-no'}">${latestItem.sunnah ? '✔ Ya' : '❌ Tidak'}</span></td>
+                    <td><span class="${latestItem.quran ? 'p-yes' : 'p-no'}">${latestItem.quran ? '✔ Ya' : '❌ Tidak'}</span></td>
+                </tr>`;
+            window.print();
+        }
+        loadAmalanLogs();
+        window.addEventListener('rohis:sync', function (e) { if (!e.detail || e.detail.key === 'jurnal') loadAmalanLogs(); });
+    </script>
+</body>
+</html>

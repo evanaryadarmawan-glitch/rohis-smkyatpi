@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin — ROHIS SMK YATPI Godong</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" href="../assets/img/logo.jpg">
+    <link rel="icon" href="../assets/img/logo.jpg">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="login-shell">
+        <div class="login-card">
+            <img src="../assets/img/logo.jpg" alt="Logo ROHIS">
+            <h2>Admin Panel ROHIS</h2>
+            <p class="sub">SMK YATPI Godong — Masuk untuk mengelola konten website</p>
+            <form id="loginForm">
+                <div class="form-group" style="text-align:left;">
+                    <label>Kata Sandi Admin</label>
+                    <input type="password" id="passInput" placeholder="Masukkan kata sandi..." required autofocus>
+                </div>
+                <button type="submit" class="btn-action"><i class="fa-solid fa-right-to-bracket"></i> Masuk</button>
+            </form>
+            <div class="login-error" id="loginError">Kata sandi salah. Silakan coba lagi.</div>
+            <p class="login-hint">Kata sandi default: <b>rohis2026</b> (dapat diganti di menu Pengaturan setelah masuk).</p>
+            <p class="login-hint"><a href="../index.html" style="color:var(--primary);font-weight:700;"><i class="fa-solid fa-arrow-left"></i> Kembali ke situs utama</a></p>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="../assets/js/firebase-config.js"></script>
+    <script src="../assets/js/data.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const pw = document.getElementById('passInput').value;
+            if (ROHIS.auth.checkPassword(pw)) {
+                ROHIS.auth.login();
+                window.location.href = 'dashboard.html';
+            } else {
+                document.getElementById('loginError').classList.add('show');
+            }
+        });
+        if (ROHIS.auth.isLoggedIn()) window.location.href = 'dashboard.html';
+    </script>
+</body>
+</html>

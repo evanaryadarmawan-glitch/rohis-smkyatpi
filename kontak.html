@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak — ROHIS SMK YATPI Godong</title>
+    <meta name="description" content="Hubungi pengurus aktif ROHIS SMK YATPI Godong melalui WhatsApp, serta lokasi sekolah.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Amiri:ital@1&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" href="assets/img/logo.jpg">
+    <link rel="icon" href="assets/img/logo.jpg">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <div class="site-loader" id="siteLoader">
+        <div class="loader-emblem"><span class="loader-ring"></span><i class="fa-solid fa-mosque"></i></div>
+        <p class="loader-text">ROHIS SMK YATPI Godong</p>
+        <p class="loader-sub">"Fastabiqul Khairat..."</p>
+    </div>
+
+    <div class="marquee-slogan">
+        <div class="marquee-content">
+            ✦ Fastabiqul Khairat! Khoir, Khoir, Khoir! ✦ ROHIS SMK YATPI Godong Berakhlak Mulia ✦ Fastabiqul Khairat! Khoir, Khoir, Khoir! ✦ ROHIS SMK YATPI Godong Berakhlak Mulia ✦&nbsp;
+        </div>
+    </div>
+
+    <header class="site-header">
+        <div class="nav-wrapper">
+            <div class="brand">
+                <img src="assets/img/logo.jpg" alt="Logo ROHIS">
+                <div class="brand-info"><h1>ROHIS SMK YATPI</h1><p>GODONG - JAWA TENGAH</p></div>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Beranda</a>
+                <a href="tentang.html">Tentang Kami</a>
+                <a href="kegiatan.html">Kegiatan</a>
+                <a href="jurnal.html">Jurnal Yaumi</a>
+                <a href="layanan.html">Layanan</a>
+                <a href="kontak.html" class="active">Kontak</a>
+            </nav>
+            <div class="nav-right">
+                <button class="icon-btn" onclick="toggleVisionMode()"><i class="v-icon fa-solid fa-moon"></i></button>
+                <button class="icon-btn burger" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html">Beranda</a>
+            <a href="tentang.html">Tentang Kami</a>
+            <a href="kegiatan.html">Kegiatan</a>
+            <a href="jurnal.html">Jurnal Yaumi</a>
+            <a href="layanan.html">Layanan</a>
+            <a href="kontak.html" class="active">Kontak</a>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <span class="eyebrow">Hubungi Kami</span>
+        <h2>Kontak <span>Pengurus ROHIS</span></h2>
+        <p>Sampaikan pertanyaan, kerja sama kegiatan, atau ingin bergabung? Hubungi pengurus aktif kami.</p>
+    </section>
+
+    <section class="container">
+        <div class="panel-box" style="margin-bottom:20px;">
+            <h4><i class="fa-solid fa-id-card"></i> Kontak Pengurus Aktif via WhatsApp</h4>
+            <div class="table-container" id="pengurusTable"></div>
+        </div>
+
+        <div class="panel-box">
+            <h4><i class="fa-solid fa-location-dot"></i> Lokasi Sekolah</h4>
+            <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">SMK YATPI Godong, Kabupaten Grobogan, Jawa Tengah.</p>
+            <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border);">
+                <iframe src="https://www.google.com/maps?q=SMK+YATPI+Godong&output=embed" width="100%" height="280" style="border:0;display:block;" loading="lazy" title="Lokasi SMK YATPI Godong"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h5>ROHIS SMK YATPI Godong</h5>
+                <p>Wadah pembinaan akhlak dan syiar Islam bagi siswa-siswi SMK YATPI Godong, Grobogan, Jawa Tengah.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Navigasi</h5>
+                <a href="tentang.html">Tentang Kami</a>
+                <a href="kegiatan.html">Kegiatan</a>
+                <a href="jurnal.html">Jurnal Yaumi</a>
+            </div>
+            <div class="footer-col">
+                <h5>Lainnya</h5>
+                <a href="layanan.html">Layanan Digital</a>
+                <a href="admin/login.html">Admin Panel</a>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2026 ROHIS SMK YATPI Godong. Fastabiqul Khairat - Khoir, Khoir, Khoir!</div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="assets/js/firebase-config.js"></script>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>renderPengurusTable('pengurusTable');</script>
+</body>
+</html>
